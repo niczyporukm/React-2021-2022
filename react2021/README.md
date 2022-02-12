@@ -36,7 +36,7 @@ Aplikacja zawiera zdefiniowaną listę produktów w pliku src/common/consts/prod
 - Kliknięcie lewym przyciskiem myszy na jeden z produktów dodaje go do 'listy zakupowej'
 - Prawa kolumna wyświetla aktualną listę zakupową, zatem na początku będzie pusta, lecz po kliknięciu na dowolny produkt z listy dostępnych produktów pojawi się on na liście zakupowej (wybrany element nie znika z listy dostępnych produktów)
 - Powinna istnieć możliwość wielokrotnego wybrania tego samego produktu, w tym celu wystarczy ponownie wybrać element z listy po lewej stronie, poczym po prawej powinien on się pojawić jako kolejna pozycja
-- Kliknięcie prawym przyciskiem myszy na dowolny element z listy zakupowej powinien usunąć go z listy (symuluje to sytuacje w ktorej ktoś wrzucił produkt do wózka z zakupami i usunął go z listy zakupowej)
+- Kliknięcie lewym przyciskiem myszy na dowolny element z listy zakupowej powinien usunąć go z listy (symuluje to sytuacje w ktorej ktoś wrzucił produkt do wózka z zakupami i usunął go z listy zakupowej)
 
 # Zadanie nr.2 - Filtrowanie listy "dostępnych produktów" (0.5 pkt)
 Lista po lewej stronie (dostępnych produktów) może być bardzo długa, zatem powinna posiadać możliwość filtrowania aby w krótkim czasie wyszukać interesujący Nas produkt. Sekcja filtrów powinna posiadać 2 typy filtrów:
