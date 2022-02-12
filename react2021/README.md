@@ -36,7 +36,7 @@ Aplikacja zawiera zdefiniowaną listę produktów w pliku src/common/consts/prod
 - Kliknięcie lewym przyciskiem myszy na jeden z produktów dodaje go do 'listy zakupowej'
 - Prawa kolumna wyświetla aktualną listę zakupową, zatem na początku będzie pusta, lecz po kliknięciu na dowolny produkt z listy dostępnych produktów pojawi się on na liście zakupowej (wybrany element nie znika z listy dostępnych produktów)
 - Powinna istnieć możliwość wielokrotnego wybrania tego samego produktu, w tym celu wystarczy ponownie wybrać element z listy po lewej stronie, poczym po prawej powinien on się pojawić jako kolejna pozycja
-- Kliknięcie lewym przyciskiem myszy na dowolny element z listy zakupowej powinien usunąć go z listy (symuluje to sytuacje w ktorej ktoś wrzucił produkt do wózka z zakupami i usunął go z listy zakupowej)
+- Kliknięcie prawym przyciskiem myszy na dowolny element z listy zakupowej powinien usunąć go z listy (symuluje to sytuacje w ktorej ktoś wrzucił produkt do wózka z zakupami i usunął go z listy zakupowej)
 
 # Zadanie nr.2 - Filtrowanie listy "dostępnych produktów" (0.5 pkt)
 Lista po lewej stronie (dostępnych produktów) może być bardzo długa, zatem powinna posiadać możliwość filtrowania aby w krótkim czasie wyszukać interesujący Nas produkt. Sekcja filtrów powinna posiadać 2 typy filtrów:
@@ -64,7 +64,7 @@ Nowo dodane produkty powinny być w pełni interaktywne, tj. powinny działać z
 Po wykonaniu zadania 1, kliknięcie na produkt z listy zakupowej (prawa kolumna) powoduje jego zniknięcie. Celem tego zadania jest rozszerzenie tej funkcjonalności o poniższą:
  - kliknięcie prawym przyciskiem myszy na element powoduje jego przekreślenie
  - ponowne kliknięcie prawym przyciskiem na przekreślony element powoduje że staje się on z powrotem nieprzekreślony
- - kliknięcie lewym przyciskiem myszy powinno działać jak poprzednio
+ - kliknięcie lewym przyciskiem myszy powinno usuwać element z listy (to samo zachowanie jakie posiadał prawy przycisk w zad.1)
 
 Do zadania będziesz potrzebował pewnej modyfikacji stylu dla elementu <li>, niestety w ramach dotychczasowych zajęć nie zajmowaliśmy się stylowaniem, zatem gotowy przykład znajduje się poniżej
   ```
