@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from '../../common/styles/Headers.module.scss';
 
-function AddProducts() {
+function Header() {
     return (
         <div className={styles.Wrapper}>
-            Add products
+            Header
         </div>
       );
   };
 
-  export default AddProducts;
+  export default Header;
