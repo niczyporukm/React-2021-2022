@@ -11,7 +11,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Routes>
     <Route path="/" element={<LoginPage />} />
-    <Route path="/shopping" element={<App />} />
+    <Route path="/airports" element={<App />} />
   </Routes>
   </BrowserRouter>,
   document.getElementById('root')
