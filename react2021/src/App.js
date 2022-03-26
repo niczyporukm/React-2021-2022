@@ -4,12 +4,15 @@ import styles from './App.module.scss';
 import { Navigate } from "react-router-dom";
 import airports from './common/consts/airports';
 import { useEffect } from 'react';
+import { uniqueId } from 'lodash';
 
 function App() {
   const userExist = localStorage.getItem('user');
 
+  // poniższy efekt wykona się tylko raz (podczas pierwszego ładowania aplikacji / ewentualnie po ręcznym odświeżeniu)
   useEffect(() => {
-    window.localStorage.setItem('airports', JSON.stringify(airports));
+    const airportsWithId = airports.map((airport) => ({...airport, id: uniqueId()}))
+    window.localStorage.setItem('airports', JSON.stringify(airportsWithId));
   }, [])
 
   if (!userExist) {

@@ -9,7 +9,7 @@ const airports = [
           lng: 20.967122
         },
         links_count: 240,
-        objectID: "679"
+        id: ""
       },
       {
         name: "Balice",
@@ -21,7 +21,7 @@ const airports = [
           lng: 19.784836
         },
         links_count: 114,
-        objectID: "669"
+        id: ""
       },
       {
         name: "Lech Walesa",
@@ -33,7 +33,7 @@ const airports = [
           lng: 18.466222
         },
         links_count: 101,
-        objectID: "668"
+        id: ""
       },
       {
         name: "Strachowice",
@@ -45,7 +45,7 @@ const airports = [
           lng: 16.885836
         },
         links_count: 66,
-        objectID: "680"
+        id: ""
       },
       {
         name: "Pyrzowice",
@@ -57,7 +57,7 @@ const airports = [
           lng: 19.080019
         },
         links_count: 56,
-        objectID: "671"
+        id: ""
       },
       {
         name: "Warsaw Modlin",
@@ -69,7 +69,7 @@ const airports = [
           lng: 20.651667
         },
         links_count: 52,
-        objectID: "8414"
+        id: ""
       },
       {
         name: "Lawica",
@@ -81,7 +81,7 @@ const airports = [
           lng: 16.826325
         },
         links_count: 42,
-        objectID: "674"
+        id: ""
       },
       {
         name: "Jasionka",
@@ -93,7 +93,7 @@ const airports = [
           lng: 22.019
         },
         links_count: 22,
-        objectID: "675"
+        id: ""
       },
       {
         name: "Goleniow",
@@ -105,7 +105,7 @@ const airports = [
           lng: 14.902206
         },
         links_count: 14,
-        objectID: "676"
+        id: ""
       },
       {
         name: "Lublin",
@@ -117,7 +117,7 @@ const airports = [
           lng: 22.714083
         },
         links_count: 12,
-        objectID: "8832"
+        id: ""
       },
     ];
 
