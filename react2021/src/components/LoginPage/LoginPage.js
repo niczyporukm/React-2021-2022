@@ -5,18 +5,21 @@ import { useNavigate } from "react-router-dom";
 function LoginPage() {
     let navigate = useNavigate();
 
-    const [userName, setUserName] = useState('');
+    const [userfirstName, setUserFirstName] = useState('');
+    const [userLastName, setUserLastName] = useState('');
 
     const signInUser = (e) => {
         e.preventDefault();
-        window.localStorage.setItem('user', JSON.stringify(userName))
+        window.localStorage.setItem('user', JSON.stringify({userfirstName, userLastName}))
         navigate('/shopping')
     }
     return (
         <div>
             <form onSubmit={signInUser}>
-                <label>User name</label>
-                <input onChange={(event) => setUserName(event.target.value)}></input>
+                <label>First name</label>
+                <input onChange={(event) => setUserFirstName(event.target.value)}></input>
+                <label>Lirst name</label>
+                <input onChange={(event) => setUserLastName(event.target.value)}></input>
                 <button type='submit'> Sign in</button>
             </form>
         </div>
