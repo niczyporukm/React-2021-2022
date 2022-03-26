@@ -1,9 +1,8 @@
-import ProductsList from './components/ProductsList/ProductsList';
-import ShopingList from './components/ShopingList/ShopingList';
+import AirportsList from './components/AirportsList/AirportsList';
 import Header from './components/Header/Header';
-// import ProductsFilters from './components/ProductsFilters/ProductsFilters';
 import styles from './App.module.scss';
 import { Navigate } from "react-router-dom";
+import airports from './common/consts/airports';
 
 function App() {
   const userExist = localStorage.getItem('user');
@@ -16,10 +15,8 @@ function App() {
   return (
     <div className={styles.appWrapper}>
       <Header />
-      {/* <ProductsFilters /> */}
       <div className={styles.columnsWrapper}>
-        <ProductsList />
-        <ShopingList />
+        <AirportsList airports={airports} />
       </div>
     </ div>
   );
