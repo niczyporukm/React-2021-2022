@@ -1,13 +1,17 @@
 import React from "react";
 import commonColumnsStyles from "../../common/styles/Columns.module.scss";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function AirportDetails(props) {
   let { id } = useParams();
+  let navigate = useNavigate();
   console.log('id', id)
   const airportDetails = JSON.parse(localStorage.getItem('airports')).find((airport) => airport.id === id);
   console.log('airportDetails', airportDetails)
   return (
+    <>
+    <ArrowBackIcon onClick={() => navigate(-1)} fontSize="large" />
     <div className={commonColumnsStyles.App}>
       <header className={commonColumnsStyles.AppHeader}>
         <p>Airport Details</p>
@@ -17,6 +21,7 @@ function AirportDetails(props) {
         <span>KOD: {airportDetails.iata_code}</span>
       </header>
     </div>
+    </>
   );
 }
 
