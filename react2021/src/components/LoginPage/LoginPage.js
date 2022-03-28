@@ -11,7 +11,7 @@ function LoginPage() {
     const signInUser = (e) => {
         e.preventDefault();
         window.localStorage.setItem('user', JSON.stringify({userfirstName, userLastName}))
-        navigate('/shopping')
+        navigate('/airports/list')
     }
     return (
         <div>

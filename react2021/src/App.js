@@ -5,6 +5,8 @@ import { Navigate } from "react-router-dom";
 import airports from './common/consts/airports';
 import { useEffect } from 'react';
 import { uniqueId } from 'lodash';
+import { BrowserRouter, Routes, Route, Router, Outlet } from "react-router-dom";
+import AirportDetails from './components/AirportDetails/AirportDetails';
 
 function App() {
   const userExist = localStorage.getItem('user');
@@ -23,9 +25,8 @@ function App() {
   return (
     <div className={styles.appWrapper}>
       <Header />
-      <div className={styles.columnsWrapper}>
-        <AirportsList airports={airports} />
-      </div>
+      <Outlet />
+      {/* <AirportsList airports={airports} /> */}
     </ div>
   );
 }
