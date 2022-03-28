@@ -11,9 +11,9 @@ function ProductsList(props) {
       <header className={commonColumnsStyles.AppHeader}>
         <p>Lista lotnisk</p>
         <Stack spacing={2}>
-        {airportsList.map((airport) =>
+        {airportsList?.map((airport) =>
 
-<Link to={`/airport/details/${airport.id}`}>
+<Link key={airport.id} to={`/airport/details/${airport.id}`}>
 <Paper>{`${airport.name} - ${airport.id}`}</Paper>
 </Link>
 
