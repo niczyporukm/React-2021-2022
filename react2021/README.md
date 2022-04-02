@@ -18,7 +18,7 @@ Instalacja lodash'a - `npm i --save lodash`
 Intalacja preetiera - `npm install --save-dev --save-exact prettier`
 
 
-# Zadanie 1 - sessionStorage vs localStorage
+# Zadanie 1 -
 
 Komponent AirportsList wyświetla informację na temat dostępnych lotnisk na podstawie danych pochodzących z pliku `src/common/consts/airports.js`.
 
