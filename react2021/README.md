@@ -9,9 +9,9 @@ Lodash - https://lodash.com/
 MaterialUI - https://mui.com/getting-started/installation/
 
 
-Instalacja MaterialUI (npm) - https://mui.com/getting-started/installation/
+Instalacja MaterialUI (npm) - https://mui.com/getting-started/installation/ / `npm install @mui/material @emotion/react @emotion/styled`
 
-Instalacja svg Icons do MaterialUI (npm) - https://mui.com/getting-started/installation/
+Instalacja svg Icons do MaterialUI (npm) - https://mui.com/getting-started/installation/ / `npm install @mui/icons-material`
 
 Instalacja lodash'a - `npm i --save lodash`
 
