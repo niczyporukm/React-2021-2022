@@ -26,8 +26,6 @@ function AirportDetails(props) {
   }
 
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
-
-    console.log('dialogIsOpen', dialogIsOpen)
   return (
     <>
         <Dialog
