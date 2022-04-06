@@ -136,11 +136,8 @@ Po usunięciu lotniska i przeniesieniu na listę, użytkownik powinien zobaczyć
 
 Poniższa informacja na temat przekazywania parametru poprzez hook useNavigate będzie zapewne pomocna
 ```javascript
-    navigate('/airports/list', {
-      id: '123',
-      name: 'sample name',
-      ...
-    });
+	navigate('/airports/list', { state: { name: airportDetails.name } });
+    
 ```
 
 # Zadanie 10 (chętni) - React 18 - useId()
