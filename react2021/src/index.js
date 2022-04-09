@@ -7,18 +7,23 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import AirportDetails from "./components/AirportDetails/AirportDetails";
 import reportWebVitals from "./reportWebVitals";
 import AirportsList from "./components/AirportsList/AirportsList";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+
 ReactDOM.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="airports" element={<App />}>
-        <Route path="list" element={<AirportsList />} />
-      </Route>
-      <Route path="airport" element={<App />}>
-        <Route path="details/:id" element={<AirportDetails />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="airports" element={<App />}>
+          <Route path="list" element={<AirportsList />} />
+        </Route>
+        <Route path="airport" element={<App />}>
+          <Route path="details/:id" element={<AirportDetails />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 

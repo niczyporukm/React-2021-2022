@@ -1,150 +1,125 @@
-# PS 7 - 02.04.2022 ReactRouter c.d / biblioteki zewnętrzne
+# PS 8 - 10.04.2022 Redux - https://redux.js.org/
 
-Docs:
+Instalacja:
 
-ReactRouter - https://reactrouter.com/docs/en/v6
+Redux - `npm install redux react-redux`
 
-Lodash - https://lodash.com/
+ReduxToolkit - `npm install @reduxjs/toolkit`
 
-MaterialUI - https://mui.com/getting-started/installation/
+Redux Chrome Extension - https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
 
+# Zadanie 1 - Instalacja / przygotowanie plików
 
-Instalacja MaterialUI (npm) - https://mui.com/getting-started/installation/ / `npm install @mui/material @emotion/react @emotion/styled`
+Zainstaluj Redux'a / ReduxToolkit'a oraz dodatek do Chrome'a
+W głównym folderze (src) utwórz folder "redux" i przygotuj puste pliki, struktura nowych plików powinna wyglądać jak poniżej:
 
-Instalacja svg Icons do MaterialUI (npm) - https://mui.com/getting-started/installation/ / `npm install @mui/icons-material`
-
-Instalacja lodash'a - `npm i --save lodash`
-
-Intalacja preetiera - `npm install --save-dev --save-exact prettier`
-
-
-# Zadanie 1 -
-
-Komponent AirportsList wyświetla informację na temat dostępnych lotnisk na podstawie danych pochodzących z pliku `src/common/consts/airports.js`.
-
-W ramach dzisiejszych zadań będziemy między innymi modyfikowali te dane, aby mieć taką możliwość w ramach tego zadania:
--   zapisz dane z pliku `airports.js` w localStorage pod kluczem "airports", a następnie zmodyfikuj komponent AirportsList.js w taki sposób aby wykorzystywał dane z local.storage zamiast bezpośrednio danych z pliku.
-- zapisanie danych do l.storage powinno się odbywać na samym początku uruchomienia aplikacji, oraz powinno się odbyć tylko raz. Użyj w tym celu w komponencie App.js hook'a useEffect aby zapisać dane do l.storage
-- pamiętaj o użyciu metod JSON.stringify() oraz JSON.parse() aby otrzymać oryginalny format danych
-
-# Zadanie 2 - Biblioteka lodash - uniqueId
-
-Każdy obiekt zawierający dane o lotnisku ma pustą wartość dla argumentu "id". Do kolejnego zadania będziemy potrzebowali unikatowych identyfikatorów dla każdego z lotnisk.
-
-Zmodyfikuj dane lotnisk w local storage w taki sposób aby każde lotnisko posiadało unikatowe id.
-
-Wykorzystaj do tego metodę `uniqueId` z biblioteki Lodash DOC: https://lodash.com/docs/4.17.15#uniqueId
-
-Powinieneś zatem zaimportować metodę uniqueId w komponencie
-`import { uniqueId } from  'lodash';`
-następnie każde wywołanie `uniqueId()` zwróci unikatowe Id w kontekście całej aplikacji
-
-Aby zmodyfikować istniejące lotniska użyj funkcj mapującej jak poniżej:
-`airports.map((airport) => ({...airport, id:  uniqueId()}))`
-Po dodaniu ID wyświetl je obok nazwy każdego lotniska w komponencie AirportsList
+![image](https://user-images.githubusercontent.com/9209826/162574557-723d79a6-bee5-4863-a187-1d8c224b50bb.png)
+- redux/store.js - główny plik konfiguracyjny reduxa (na ten plik powinien wskazywać <Provider/> którego użyjesz w kolejnym zadaniu
+- redux/airports - folder przeznaczony do przechowywania danych związanych z lotniskami
+- redux/airports/initialState.js - w tym pliku będziemy exportowali domyślny zestaw danych (stanów) dla kategorii airports
+- redux/airports/reducer.js - w tym pliku będą znajdowały się reducer modyfikujący dane w storze na podstawie otrzymywanych akcji
+- redux/airports/selectors.js - w tym pliku będą znajdowały się "selectory", czyli funkcje które potrzebują dokonać jakichś operacji przed zwróceniem danych ze store'a
 
 
-# Zadanie 3 - Dodanie podstrony - airport/details/
+# Zadanie 2 - Redux - początkowa konfiguracja
 
-Zadanie polega na zmodyfikowaniu aktualnego routingu w następujący sposób:
-1. Użytkownik po zalogowaniu powinien być przenoszony na adres /airports/list (aktualnie jest /airports)
-2. Aplikacja powinna posiadać dodatkowy routing /airport/details/:id do wyświetlenia szczegółowych informacji o konkretnym lotnisku
+Początkowa konfiguracja będzie się składała z 4 kroków:
+- w pliku `store.js` zdefiniuj skąd będą brane informacje na temat reducerów, poprzez podanie ich do metody `configureStore` z redux toolkit'a
+![image](https://user-images.githubusercontent.com/9209826/162574973-902b0ebc-4aef-4f16-a39d-1a5ea6a2912a.png)
+- w pliku `reducer.js` który jest importowany powyżej utwórz "szablon" dla akcji które będziemy dodawali w kolejnych zadaniach
+![image](https://user-images.githubusercontent.com/9209826/162575041-c9a353e3-bfbe-4542-81e9-869d5f9e2919.png)
+- w pliku `initialState.js` który jest importowany powyżej dodaj początkowy stan dla naszego "zbioru" airports, niech będzie on pustą listą
+![image](https://user-images.githubusercontent.com/9209826/162575119-ede7a4d0-c401-4d1d-aeed-3e947e266b9c.png)
+- na koniec pozostało przekazać te wszystkie informacje dla naszej aplikacji, w tym celu "opakuj" wszystkie nasze komponenty w pliku `index.js` komponentem <Provider> pochodzącym z biblioteki redux i przekaż do niego jako właściwość store konfigurację z pliku store.js,
+![image](https://user-images.githubusercontent.com/9209826/162575291-15129015-7a73-4541-9b52-5ecbc5f78530.png)
 
-Na obu stronach powinien wyświetlać się komponent <App / > w którym bedzie się znajdował tylko nagłówek (czyli komponent <Header / > oraz komponenty pochodzące z routingu (powinieneś zatem użyć <Outlet / > - patrz wykład
+Po poprawnej konfiguracji powinieneś mieć możliwość poglądu stanu początkowego w rozszerzeniu do Chrome
+![image](https://user-images.githubusercontent.com/9209826/162575349-c948640a-c85c-4c91-90b0-49947e5e3ad5.png)
 
-- Adres /airports/list powinien wyświetlać listę lotnisk jak dotychczas
-- Po kliknięciu na dowolną nazwę lotniska użytkownik powinien zostać przeniesiony do adresu /airport/details/:id - id bedzie identyfikatorem lotniska (dodałeś go w zadaniu 2)
-- Po przejściu na adres /airport/details/:id użytkownik powinien zobaczyć zamiast listy lotnisk zawartość komponentu <AirportDetails / > który musisz utworzyć. W ramach tego zadania wypisz w tym komponencie jedynie paragraf z tekstem jak poniżej
-```
-<div  className={commonColumnsStyles.App}>
-	<header  className={commonColumnsStyles.AppHeader}>
-		<p>Airport Details</p>
-	</header>
-</div>
-```
-Dla lepszego zrozumienia podziału routingu przeanalizuj poniższy kod
-```
-<Routes>
-	<Route path="/" element={<LoginPage />}  />
-	<Route path="airports" element={<App />}>
-		<Route path="list" element={<AirportsList />} />
-	</Route>
-	<Route path="airport" element={<App />}>
-		<Route path="details/:id" element={<AirportDetails />} />
-	</Route>
-</Routes>
-```
-# Zadanie 4 - Uzupełnienie AirportDetails o dane lotniska
+Jak widać powyżej już mamy dostępny globalny stan dla całej aplikacji o nazwie "airports" który jest pustą listą zgodnie z naszą deklaracją.
 
-Po zrobieniu zadania 3 posiadasz komponent AirportDetails który posiada informację na temat id lotniska (przesłane przez Routing). Na podstawie tego id wyszukaj pasujące lotnisko w localStorage i wyświetl kilka informacji w tym komponencie (ID, Państwo, Miasto, Nazwa, Kod)
-```
-<header  className={commonColumnsStyles.AppHeader}>
-	<p>Airport Details</p>
-	<span>Państwo: {airportDetails.country}</span>
-	...
-</header>
-```
-Aby pobrać informację o parametrze przesłanym przez routing użyj hook'a useParam
-```
-import { useParams } from  'react-router-dom';
-```
+# Zadanie 3 - Ładowanie lotnisk z pliku i wyświetlenie w komponencie pobranych danych ze store'a
 
-# Zadanie 5 - Arrow back - nawigacja (Material UI)
-
-W ramach tego zadania :
--	użyjmy ikony ArrowBack dostarczonej przez zewnętrzną bibliotekę MaterialUI https://mui.com/components/material-icons/
--  wyświetlmy ją w komponencie AirportDetails
-- na zdarzenie onClick podepnijmy "nawigację wsteczną", czyli odwzorujmy zachowanie kliknięcia na strzałkę w lewo dostępna w przeglądarce obok adresu url
-- dostęp do takiej nawigacji dostarcza nam hook
-`import {  useNavigate } from  'react-router-dom'` a dokładnie wywołanie metody `navigate(-1)`
-
-# Zadanie 6 - Material UI - wykorzystanie zewnętrznych komponentów
-
-Celem tego zadania jest "upiększenie" aplikacji bez wiedzy na temat CSS'a. Będziesz również musiał zwrócić uwagę na właściwości które otrzymują poszczególne komponenty z biblioteki MaterialUi i się do tego dostosować.
-Zastąp zatem kilka komponentów których aktualnie używamy gotowymi z biblioteki MaterialUI
-W komponencie LoginPage:
-1) Zastąp kombinację < label > + < input > gotowym komponentem < TextField /> - https://mui.com/components/text-fields/
-2) Zastąp przycisk < button > komponentem <Button / > - https://mui.com/components/buttons/#main-content
-W komponencie Header:
-1) Użyj również komponentu < Button / >
-2) Uyj komponentu < Typography /> zamiast standardowego < p > - https://mui.com/components/typography/
-W komponencie AirportsList:
-1)  użyj komponentu < Stack spacing={2}> - do wyświetlania listy w kolumnie - https://mui.com/components/stack/#main-content
-2) < span > zastąp np. komponentem < Paper /> - https://mui.com/components/paper/#main-content
-
-# Zadanie 7 - Usuwanie lotniska
 W ramach tego zadania:
-1) Obok ikony ArrowBack w komponencie AirportDetails umieść nową ikonę kosza
-2) kliknięcie na tą ikonę powinno wykonać dwie czynności:
--	na podstawie posiadanego id usunąć z local.storage powiązane lotnisko
--	przenieść użytkownika do adresu /airports/list
+- zamień pustą listę w `initialState.js` na dane z pliku `src/common/consts/airports.js`, następnie sprawdź czy trafiły one do store'a w rozszerzeniu Chrome
+- pobierz te dane w komponencie AirportsList i wyświetl jak na poprzednich zajęciach, aby tego dokonać:
+	- musisz przekazać stan ze store'a do komponentu AirportsList, aby był dostępny jako props wewnątrz komponentu, służy do tego metoda `mapStateToProps` której szablon wygląda jak poniżej. Funkcja ta powinna być zadeklarowana pod komponentem, ale przed jego wyexportowaniem.
 
-Usunięte lotnisko nie powinno znajdować się na liście, możesz usunąć więcej lotnisk aby sprawdzić działanie, poczym odświeżyć przeglądarkę aby załadowac listę na nowo
+```
+const mapStateToProps = (state) => {
+  // state - dane pochodzące z redux sotre'a
+  return {
+    airportsFromRedux: state.airport.airports,
+    // airportsFromRedux - tak będzie się nazywał props wewnątrz komponentu
+    // state.airport.airports - źródło danych które mają być dostępne jako "props.airportsFromRedux"
+  };
+};
+```
+Aktualnie jest to zwykła funkcja która nie jest nigdzie wytkorzystywana. Aby za jej pomocą rzeczywiście "dokleić" nowe propsy (właściwości) do komponentu musisz wykorzystać metodę `connect` z reduxa, podczas exportowania komponentu, przykład poniżej:
+![image](https://user-images.githubusercontent.com/9209826/162576363-28ed802b-7c93-428d-8b91-785a3a2a8d8a.png)
+![image](https://user-images.githubusercontent.com/9209826/162576366-ae33d4a4-f303-4b8d-8edd-a59e5123df3a.png)
 
+Jeżeli wszystko działa poprawnie pod właściwością `props.airportsFromRedux` powinieneś mieć lotniska pochdzące z reduxa. Wyświetl je na ekranie jak na poprzednich zajęciach.
 
-# Zadanie 8 - Usuwanie lotniska - confirmation popup
-Usuwanie elementu nigdy nie powinno odbywać się za pośrednictwem pojedyńczej akcji bez potwierdzenia przez użytkownika. W ramach tego zadania wyświetl okno potwierdzające, które będzie posiadało:
-1) tekst - "Czy na pewno chcesz usunąć to lotnisko:  Okecie  /  Poland" - nazwa i państwo jest wartością zmienną
-2) Przycisk "Tak" który zamyka okno, usuwa lotnisko i przenosi użytkownika do airports/list
-3) Przycisk "Nie", który zamyka okno bez dodatkowej akcji
+# Zadanie 4 - Dodanie lotnisk za pomocą akcji z komponentu
 
-Wykorzystaj do tego celu komponent Alert Dialog - https://mui.com/components/dialogs/#alerts
+W zadaniu poprzednim dodaliśmy dane z pliku bezpośednio w inicjalizacji store'a. W tym zadaniu zmieńmy to zachowanie w taki sposób aby dane były ładowane za pomocą akcji wywołanej w komponencie App.js (podobnie jak było z ładowaniem danych z localStorage na poprzednich zajęciach). Powinieneś zatem:
+- obsłużyć akcję o typie "SET_INITIAL_AIRPORTS_LIST" która ustawi w redux store dane które otrzyma z komponentu
+![image](https://user-images.githubusercontent.com/9209826/162576964-d6740e26-6696-466a-87a9-818d7ee21ec2.png)
+- wysłać te dane z komponentu, powinieneś zatem w komponencie `App.js`:
+	- uzyskać dostęp do akcji typu "SET_INITIAL_AIRPORTS_LIST" za pomocą wywołania funckji z props'a. Użyj do tego funkcji `mapDispatchToProps` aby zmapować wywołanie akcji "SET_INITIAL_AIRPORTS_LIST" tzw. dispatch pod konkretnym propsem który będzie dostępny w komponencie
 
-# Zadanie 9 - Informacja o usuniętym lotnisku na AirportsList
+```
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setInitialAirportsList: (value) =>
+      dispatch({ type: "SET_INITIAL_AIRPORTS_LIST", value: value }),
+  };
+};
 
-Po usunięciu lotniska i przeniesieniu na listę, użytkownik powinien zobaczyć  dodatkowo informację o treści "Lotnisko Okęcie / Polska" zostało usunięte. Użyj do tego komponentu Snackbar - https://mui.com/components/snackbars/
-
-Poniższa informacja na temat przekazywania parametru poprzez hook useNavigate będzie zapewne pomocna
-```javascript
-    navigate('/airports/list', {
-      id: '123',
-      name: 'sample name',
-      ...
-    });
+export default connect(null, mapDispatchToProps)(Header);
 ```
 
-# Zadanie 10 (chętni) - React 18 - useId()
+Dołączenie powyższej funkcj spowoduje, że pod właściwością `props.setInitialAirportsList` będzie znajdowac się funcja która przyjmuje dane, następnie przekazuje je do akcji w reducerze.
 
-Kilka dni temu wyszła nowe wersja React'a(18). Podbij wersję do najnowszej i spróbuj użyć nowo dodanego hooka useId() zamiast lodashowego uniqueId()
+Możesz zatem wewnątrz komponentu wywołać metodę `props.setInitialAirportsList(lotniskaZPliku)` aby dane na temat lotnisk zostały zapisane w storze
 
-Doc React18 - https://reactjs.org/blog/2022/03/29/react-v18.html
+W pliku `initialState` nie potrzebujemy już ustawiać wartości z pliku, ponieważ robimy to z poziomu wywołania akcji, zatem ustaw tam z powrotem pustą listę jako wartość domyślną.
+
+# Zadanie 5 - Ładowanie zawartości dla AirportDetails
+
+Aby w komponencie AirportDetails wyświetlić informacje o lotnisku potrzebujemy pobrac jego informacje se store'a podstawie id. Aby nie pobierać wszystkich lotnisk do komponentu i szukać odpowiedniego, napiszmy prosty selektor "funkcję pomocniczą która zrobi takie wyszukanie poza naszym komponentem i zwróci wynik". Właśnie na potrzeby takich funkcji utworzyliśmy dedykowany plik `selectors.js`, dodajmy w nim
+	![image](https://user-images.githubusercontent.com/9209826/162577983-85bbeacb-3649-435d-b9eb-5e920511ca66.png)
+czyli funkcję która będzie przyjmowała 2 argumenty, cały stan reduxa oraz id lotniska które szukamy
+Aby wykorzystać taki selektor wewnątrz komponentu musimy go dodać podobnie jak w zadaniu 3 za pomocą `mapStateToProps`
+	![image](https://user-images.githubusercontent.com/9209826/162578010-b2579e14-087d-467f-ab9e-3f39bbd1b4de.png)
+z tą różnicą że nie będzie to wyciągnięcie informacji ze store'a jak w zadaniu 3 a wywołanie funkcji z parametrem "id"
+
+Dzięki takiemu mapowaniu bedziemy mogli wywołać funkcję wewnątrz komponentu np
+`const airportDetails = props.getAirportById(idLotniskaDoWyszukania)`
+A następnie wykorzystac te dane do wyświetlenia w komponencie.
+
+# Zadanie 6 - Modyfikacja danych w store - usuwanie lotniska
+
+Aktualnie funkcja usuwania jest "popsuta", ponieważ jedynie przenosi użytkownika do strony z listą. Celem tego zadania jest wywołanie fukcji (przed przeniesiem użytkownika do strony z lotniskami) która będzie usuwała lotnisko o podanym id, a tak na prawdę będzie ustawiała nową listę w stor'e która nie będzie zawierała oczekiwanego lotniska.
+Aby to zrobić obsłuż nową akcję w reducerze jak poniżej
+ ![image](https://user-images.githubusercontent.com/9209826/162578477-0997807e-c31f-42f2-b5e5-6118cd802255.png)
+i wykorzystaj wiedzę z zadania 4 aby obsłużyć to w komponencie `AirportDetails.js`
+
+
+
+# Zadanie 7 - zamiana mapStateToProps / mapDispatchToProps na useSelector / useDispach
+
+Metody mapujące `mapStateToProps` oraz `mapDispatchToProps` zostały wprowadzone z myślą o komponentach klasowych (i są w nich wykorzystywane nadal), ale jak widać możemy z nich korzystać również w komponentach funkcyjnych.
+Niewątpliwą zaletą k.funkcyjnych jest możliwość korzystania z hooków, biblioteka Redux "serwuje" Nam dwa hooki `useSelector` oraz `useDispach` które są odpowiednikiem funkcji mapujących.
+Wykorzystaj wiedzę z wykładu i zastąp funcje mapujące we wszystkich komponentach hookami, zwróć uwagę o ile mniej kodu (a zarazem zapamiętanej wiedzy) potrzeba żeby wykonać to samo !!!
+
+# Zadanie 8 - Header.js - przycisk "Zresetuj lotniska"
+W ramach tego zadania dodaj do komponentu `Header.js` przycisk "Zresetuj lotniska", który po kliknięciu wywoła funcję ze store'a która ustawia listę lotnisk do stanu początkowego (z pliku). Ta metoda została napisana w zadaniu 4 zatem pozostaje jedynie jej użyć za pomocą hooka useDispatch.
+
+Po wykonaniu tego zadania zwróć uwagę jak mało nowego kody trzeba było napisać. Dzięki już gotowej funkcji w store i nasłuchiwaniu bezpośrednio na store w komponencie `AirportList` wszystko dzieje się automatycznie bez zbędnej komunikacji w góre i w dół (tak wyglądało to na jednych z piewrszych zajęć).
+
+# Zadanie 9 - Mała optymalizacja
+Zmodyfikuj reducer dla akcji "SET_INITIAL_AIRPORTS_LIST" a taki sposób aby nie trzeba było przesyłac listy lotnisk z komponentu (aktualnie 2 komponenty wywołują tą akcję, zatem w obu trzeba wywołać `import airports from '.../airports.js'` Zamiast tego zrób to jedynie raz już wewnątrz reducera i wywołaj akcje bez parametru wewnątrz dwóch komponentów
+
+
