@@ -10,11 +10,15 @@ function Header(props) {
 
   const setInitialValues = async () => {
     try {
-      props.setLoadingAirportsState(true);
-      const response = await axios.get(`http://localhost:9000/users/delayed`);
+      props.setLoadingAirportsState("loading");
+      const response = await axios.get(
+        `http://localhost:9000/users/delayed/failed`
+      );
       props.setInitialAirportsList(response.data);
-      props.setLoadingAirportsState(false);
+      props.setLoadingAirportsState("initial");
     } catch (e) {
+      props.setLoadingAirportsState("error");
+      props.setLoadingAirportsError(e.message);
       console.log("ERROR", e);
     }
   };
@@ -39,6 +43,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_INITIAL_AIRPORTS_LIST", value: value }),
     setLoadingAirportsState: (value) =>
       dispatch({ type: "SET_AIRPORTS_LOADING_STATE", value: value }),
+    setLoadingAirportsError: (value) =>
+      dispatch({ type: "SET_AIRPORTS_LOADING_ERROR", value: value }),
   };
 };
 

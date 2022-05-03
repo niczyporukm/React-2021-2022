@@ -6,6 +6,8 @@ export const airportReducer = (state = initialAirportsState, action) => {
       return { ...state, airports: action.value };
     case "SET_AIRPORTS_LOADING_STATE":
       return { ...state, airportsIsLoading: action.value };
+    case "SET_AIRPORTS_LOADING_ERROR":
+      return { ...state, loadingAirportsError: action.value };
     case "REMOVE_AIRPORT_BY_ID":
       return {
         ...state,
