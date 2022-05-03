@@ -4,6 +4,8 @@ export const airportReducer = (state = initialAirportsState, action) => {
   switch (action.type) {
     case "SET_INITIAL_AIRPORTS_LIST":
       return { ...state, airports: action.value };
+    case "SET_AIRPORTS_LOADING_STATE":
+      return { ...state, airportsIsLoading: action.value };
     case "REMOVE_AIRPORT_BY_ID":
       return {
         ...state,

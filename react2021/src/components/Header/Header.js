@@ -10,8 +10,10 @@ function Header(props) {
 
   const setInitialValues = async () => {
     try {
-      const response = await axios.get(`http://localhost:9000/users`);
+      props.setLoadingAirportsState(true);
+      const response = await axios.get(`http://localhost:9000/users/delayed`);
       props.setInitialAirportsList(response.data);
+      props.setLoadingAirportsState(false);
     } catch (e) {
       console.log("ERROR", e);
     }
@@ -35,6 +37,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setInitialAirportsList: (value) =>
       dispatch({ type: "SET_INITIAL_AIRPORTS_LIST", value: value }),
+    setLoadingAirportsState: (value) =>
+      dispatch({ type: "SET_AIRPORTS_LOADING_STATE", value: value }),
   };
 };
 
