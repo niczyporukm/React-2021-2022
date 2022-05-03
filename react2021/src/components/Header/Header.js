@@ -3,10 +3,19 @@ import styles from "../../common/styles/Headers.module.scss";
 import { Link } from "react-router-dom";
 import { Typography, Button } from "@mui/material";
 import { connect } from "react-redux";
-import airports from "../../common/consts/airports";
+import axios from "axios";
 
 function Header(props) {
   const currentUser = JSON.parse(window.localStorage.getItem("user"));
+
+  const setInitialValues = async () => {
+    try {
+      const response = await axios.get(`http://localhost:9000/users`);
+      props.setInitialAirportsList(response.data);
+    } catch (e) {
+      console.log("ERROR", e);
+    }
+  };
 
   return (
     <div className={styles.Wrapper}>
@@ -17,9 +26,7 @@ function Header(props) {
       <Link to="/">
         <Button variant="outlined">Sign out</Button>
       </Link>
-      <Button onClick={() => props.setInitialAirportsList(airports)}>
-        Załaduj lotniska
-      </Button>
+      <Button onClick={setInitialValues}>Załaduj lotniska</Button>
     </div>
   );
 }
@@ -27,7 +34,7 @@ function Header(props) {
 const mapDispatchToProps = (dispatch) => {
   return {
     setInitialAirportsList: (value) =>
-      dispatch({ type: "SET_INITIAL_AIRPORTS_LIST", value: null }),
+      dispatch({ type: "SET_INITIAL_AIRPORTS_LIST", value: value }),
   };
 };
 
