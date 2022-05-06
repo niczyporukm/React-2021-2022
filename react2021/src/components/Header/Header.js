@@ -11,9 +11,7 @@ function Header(props) {
   const setInitialValues = async () => {
     try {
       props.setLoadingAirportsState("loading");
-      const response = await axios.get(
-        `http://localhost:9000/users/delayed/failed`
-      );
+      const response = await axios.get(`http://localhost:9000/users/delayed`);
       props.setInitialAirportsList(response.data);
       props.setLoadingAirportsState("initial");
     } catch (e) {

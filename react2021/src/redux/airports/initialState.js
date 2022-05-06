@@ -4,4 +4,5 @@ export const initialAirportsState = {
   airports: [],
   airportsIsLoading: "initial",
   loadingAirportsError: "",
+  selectedAirport: {},
 };

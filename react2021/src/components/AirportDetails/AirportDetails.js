@@ -8,7 +8,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
 import { connect, useSelector, useDispatch } from "react-redux";
-import { getAirportByIdSelector } from "../../redux/airports/selectors";
+import { getSelectedAirport } from "../../redux/airports/selectors";
 
 function AirportDetails() {
   let navigate = useNavigate();
@@ -20,13 +20,15 @@ function AirportDetails() {
     navigate(-1);
   };
 
-  const airportDetails = useSelector((store) =>
-    getAirportByIdSelector(store, id)
-  );
+  const goBackToAirportsList = () => {
+    dispatch({ type: "SET_SELECTED_AIRPORT", value: {} });
+    navigate(-1);
+  }
+
+  const airportDetails = useSelector((store) => getSelectedAirport(store));
 
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
-  console.log("dialogIsOpen", dialogIsOpen);
   return (
     <>
       <Dialog open={dialogIsOpen}>
@@ -38,7 +40,7 @@ function AirportDetails() {
           </Button>
         </DialogActions>
       </Dialog>
-      <ArrowBackIcon onClick={() => navigate(-1)} fontSize="large" />
+      <ArrowBackIcon onClick={goBackToAirportsList} fontSize="large" />
       <DeleteForeverIcon
         onClick={() => setDialogIsOpen(true)}
         fontSize="large"
