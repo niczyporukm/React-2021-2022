@@ -7,17 +7,22 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getSelectedAirport } from "../../redux/airports/selectors";
+import axios from "axios";
 
 function AirportDetails() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   let { id } = useParams();
 
-  const handleRemoveAirportFromList = () => {
-    dispatch({ type: "REMOVE_AIRPORT_BY_ID", value: id });
-    navigate(-1);
+  const handleRemoveAirportFromList = async () => {
+    try {
+      await axios.delete(`http://localhost:9000/users/${id}`)
+      const airportsList = await axios.get(`http://localhost:9000/users`);
+      dispatch({ type: "SET_INITIAL_AIRPORTS_LIST", value: airportsList.data })
+      navigate('/airports/list');
+    } catch(e) {}
   };
 
   const goBackToAirportsList = () => {
