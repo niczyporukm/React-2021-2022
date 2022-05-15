@@ -45,6 +45,27 @@ Aby odwoływać się do kolejnych elementów jak poniżej
 
 będziesz musiał na bierząco dodawać unikatowe właściwości do elementów w komponentach, powodzenia !.
 
+Przykładowy scenariusz do testowania:
+- wpisz imie
+- wpisz nazwisko
+- kliknij na przycisk
+- sprawdź url
+- sprawdź czy strona zawiera wpisane imie i nazwisko
+- kliknij na przycisk "Załaduj lotniska"
+- sprawdź czy po 2-ch sekundach kręci się spinner
+- sprawdź czy po 4-rech sekundach widoczne jest przykładowe lotnisko
+- kliknij na przykladowe lotnisko
+- sprawdź czy widoczny jest spinner
+- sprawdź po 4 sekundach czy użytkownik został przeniesiony do adresu url
+- kliknij na ikonę kosza
+- sprawdź czy widoczny jest jakiś tekst z okienka
+- kliknij na "tak"
+- sprawdź czy użytkownik zostal przenioeniony na adres url 
+- sprawdź czy nie ma na ekranie lotniska które usunąłeś
+- ......
+
+
+
 # Zadanie 4 - Automatyzacja - uruchamianie testów jednostkowych przed każdym commitem - git hook pre-commit
 
 Częstą praktyką jest uruchamianie szybkich testów - jednostkowych przy każdym commicie, dzięki temu na bierząco mamy kontrolę, czy nie psujemy danej funkcjonalności. W ramach tego zadania włączymy taką automatyzację, użyjemy do tego git hook'a pre-commit.
